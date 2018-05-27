@@ -10,7 +10,8 @@ The application is developed using Spring Boot, JPA/Hibernate core, and H2 in-me
 3. Run <app_name>.jar file with console help or any IDE you like.
 By default the embeded Tomcat Server within spring boot app will run on localhost:8080/url-shortener/
 4. To test: 
-  a) send POST Request using POSTMAN to localhost:8080/url-shortener/to-shorten with a body of type application/json: 
+
+a) send POST Request using POSTMAN to localhost:8080/url-shortener/to-shorten with a body of type application/json: 
 
 ```
 {
