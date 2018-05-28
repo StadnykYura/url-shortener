@@ -5,6 +5,15 @@ import com.purko.url.shortener.util.Constants;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Class to represent URL in DB.
+ * 'Id' field is used to encode it to base62 key of particular url
+ * 'updatedTime' represents a time when this url was asked to be shortened.
+ *  It can be used to delete old rows from DB if it weren't asked for a particular time with some Job (e.g. quartz);
+ *
+ * @author Yura
+ * @version 1.0
+ */
 @Entity
 @Table(name="URL_DATA")
 public class UrlData {

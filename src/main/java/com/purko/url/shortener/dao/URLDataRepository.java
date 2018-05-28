@@ -7,6 +7,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
+/**
+ * interface is used as DAO layer to get data from DB
+ */
 public interface URLDataRepository extends JpaRepository<UrlData, Long>{
 
     @Query(value = "select u from UrlData u where u.originalUrl = :originalUrl")

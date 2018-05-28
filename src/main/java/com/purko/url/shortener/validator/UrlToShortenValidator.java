@@ -13,6 +13,9 @@ import org.springframework.validation.Validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Custom validator for UrlToShorten.class, which is used as DTO to get original url from client request
+ */
 @Component
 public class UrlToShortenValidator implements Validator {
 
@@ -26,7 +29,7 @@ public class UrlToShortenValidator implements Validator {
     c) ^(https?:\\/\\/)?(www\\.)?([\\w]+\\.)+[‌​\\w]{2,63}\\/?$
      */
 
-    private static final String URL_REGEX = "^((https?|ftp)://)?[^\\s/$.?#].[^\\s]*$";
+ //   private static final String URL_REGEX = "^((https?|ftp)://)?[^\\s/$.?#].[^\\s]*$";
     private static final Pattern URL_PATTERN = Pattern.compile("^((https?|ftp)://)?[^\\s/$.?#].[^\\s]*$");
 
     @Override

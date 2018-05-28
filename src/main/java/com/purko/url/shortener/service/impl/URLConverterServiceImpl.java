@@ -14,9 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * Business layer for changing original url to shortened and visa versa
+ */
 @Service
 public class URLConverterServiceImpl implements URLConverterService {
 
+    /**
+     * DAO for interaction with DB
+     */
     private final URLDataRepository urlDataRepository;
 
     @Autowired
@@ -54,6 +60,12 @@ public class URLConverterServiceImpl implements URLConverterService {
                 .append(base62Key).toString();
     }
 
+    /**
+     * Getting an existing UrlData object from DB or creating new one if it isn't exist
+     * @param originalClientUrl original url,
+     *                          which used to find an existing url in DB or create a new one;
+     * @return UrlData object, which has 'id' field
+     */
     private UrlData getManagedUrlData(String originalClientUrl) {
         UrlData managedUrlData = new UrlData();
         Optional<UrlData> urlDataFromDb = urlDataRepository.findExistingOriginalUrl(originalClientUrl);
@@ -71,12 +83,22 @@ public class URLConverterServiceImpl implements URLConverterService {
         return managedUrlData;
     }
 
+    /**
+     * Getting a hostname of the local server including a contextPath
+     * @param request HttpServletRequest
+     * @return local hostname with contextPath
+     */
     private String getHostName(HttpServletRequest request) {
         String contextPath = request.getContextPath();
         String url = request.getRequestURL().toString();
         return url.substring(0, url.indexOf(contextPath)) + contextPath;
     }
 
+    /**
+     * Getting rid of a scheme (protocol), e.g: http, https berore an original URL
+     * @param originalUrl original URL, which will be shortened
+     * @return original URL without scheme
+     */
     private String cleanUrlFromScheme(String originalUrl) {
 
         if (originalUrl.startsWith("https://")) {
@@ -96,7 +118,6 @@ public class URLConverterServiceImpl implements URLConverterService {
      * @param uniqueKeyForOriginalURL shortened url by our system
      * @return original URL
      */
-
     @Override
     @Transactional
     public String fromShortenUrlToOriginal(String uniqueKeyForOriginalURL) {

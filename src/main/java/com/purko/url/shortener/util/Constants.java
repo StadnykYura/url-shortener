@@ -7,6 +7,7 @@ public class Constants {
     public static final String BAD_HASHING_ALGORITHM = "BAD_HASHING_ALGORITHM";
     public static final String NO_DATA_FOUND_IN_DB = "No data was found in DB";
     public static final String EMPTY_URL = "Empty url, please, provide an URL";
+    public static final String PROBLEM_WITH_REDIRECTING = "Problem occurred while redirecting to original url";
 
     // for id generation strategy
     public static final String ID_GENERATOR = "ID_GENERATOR";

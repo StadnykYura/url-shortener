@@ -4,11 +4,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.purko.url.shortener.exceptions.BadHashingAlgorithmException;
 import com.purko.url.shortener.exceptions.NoDataFoundExceptionInDB;
 import com.purko.url.shortener.exceptions.NotValidUrlException;
+import com.purko.url.shortener.exceptions.RedirectingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Global Exception Handler to handle all of the possible exception in app
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -22,13 +26,23 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity handleAnyException(Exception e) {
+    @ExceptionHandler({BadHashingAlgorithmException.class})
+    public ResponseEntity handleBadHashingAlgoException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({BadHashingAlgorithmException.class})
-    public ResponseEntity handleBadHashingAlgoException(Exception e) {
+    @ExceptionHandler({RedirectingException.class})
+    public ResponseEntity handleRedirectiongException(Exception e) {
+        return new ResponseEntity<>(e.getCause().getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handles any exceptions within app
+     * @param e Exception
+     * @return ResponseEntity object
+     */
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity handleAnyException(Exception e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
