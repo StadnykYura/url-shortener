@@ -1,0 +1,32 @@
+###
+#   General Settings
+###
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2/console
+
+server:
+  port: 8080
+  contextPath: /url-shortener
+###
+#   Local Domain Address (we can use this with @Value{hostname.address} unless we recognize hostname manually);
+###
+  hostname:
+    address: http://localhost:8080/url-shortener/
